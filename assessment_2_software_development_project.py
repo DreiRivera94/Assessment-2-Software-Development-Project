@@ -19,12 +19,12 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     approval_reference_number = staff_id + requisition_id[2:]
 
     requisition = {"Date": date,
-                   "Staff ID": staff_id,
-                   "Staff Name": staff_name,
-                   "Requisition ID": requisition_id,
+                   "Staff_ID": staff_id,
+                   "Staff_Name": staff_name,
+                   "Requisition_ID": requisition_id,
                    "Total": total,
                    "Status": 'Pending',
-                   "Approval Reference Number": approval_reference_number}
+                   "Approval_Reference_Number": approval_reference_number}
   
     self.__requisitions.append(requisition)
 
@@ -33,6 +33,20 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
   def viewRequisition(self):
     if len(self.__requisitions) == 0:
       print("No requisition entries found.")
+
+    else:
+      print("-------------------")
+      print("Requisition Requests")
+      print("-------------------")
+
+      for requisition in self.__requisitions:
+        print(f"Date: {requisition["Date"]}")
+        print(f"Staff ID: {requisition["Staff_ID"]}")
+        print(f"Staff Name: {requisition["Staff_Name"]}")
+        print(f"Requisition ID: {requisition["Requisition_ID"]}")
+        print(f"Total: {requisition["Total"]}")
+        print(f"Status: {requisition["Status"]}")
+        print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
 
   def approveRequisition(self): # Method to approve requisition entry
     pass
