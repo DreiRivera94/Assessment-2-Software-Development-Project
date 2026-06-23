@@ -4,15 +4,15 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
   def addRequistion(self): # Method to add a requisition entry
 
-    date = input("Enter the date: (DD/MM/YEAR)")
+    date = input("Enter the date: (DD/MM/YEAR)") # Asks user to enter date
 
-    staff_id = input("Enter your 4 Digit Staff ID: ")
+    staff_id = input("Enter your 4 Digit Staff ID: ") # Asks user to enter 4 digit staff ID
 
-    staff_name = input("Enter your name: ")
+    staff_name = input("Enter your name: ") # Asks user to enter full name
 
-    staff_name = staff_name.title
+    staff_name = staff_name.title # Capitalize the first letter of each section of the name
 
-    requisition_id = 10000 + 1
+    requisition_id = 10000 + 1 # Value for the requisition ID starts at 
 
     total = int(input("Enter your total amount the you would like to requisite: "))
     
@@ -29,6 +29,10 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     self.__requisitions.append(requisition)
 
     print(f"Requisition {requisition_id} has been added to the system.")
+
+  def viewRequisition(self):
+    if len(self.__requisitions) == 0:
+      print("No requisition entries found.")
 
   def approveRequisition(self): # Method to approve requisition entry
     pass
