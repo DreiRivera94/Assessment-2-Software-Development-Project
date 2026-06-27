@@ -41,7 +41,7 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
     print(f"Requisition {self.requisition_id} has been added to the system.")
 
-  def viewRequisition(self):
+  def viewRequisition(self): # Method to view all requisitions 
     if len(self.__requisitions) == 0:
       print("No requisition entries found.")
 
@@ -74,9 +74,29 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
   def respondRequisition(self): # Method to respond to requisition entry by changing the status (pending to approved or not approved)
     pass
+  
+  def displayRequisition(self): # Method to display a specific requistion information by entering the requesition ID
 
-  def displayRequisition(self): # Method to display requistion information
-    pass
+    selected_requisition = input("To display a requisition entry, please enter its corresponding requisition ID ")
+    for requisition in self.__requisitions:
+      if selected_requisition == requisition["Requisition_ID"]:
+        print("-------------------")
+        print(f"Requisition Entry {selected_requisition} has been found.")
+        print("-------------------")
+
+        print(f"Requisition ID: {requisition["Requisition_ID"]}")
+        print(f"Date: {requisition["Date"]}")
+        print(f"Staff ID: {requisition["Staff_ID"]}")
+        print(f"Staff Name: {requisition["Staff_Name"]}")
+        print(f"Total: {requisition["Total"]}")
+        print(f"Status: {requisition["Status"]}")
+        print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
+
+        return
+      
+      print(f"Sorry, requisition number {selected_requisition} has not been found. Please try again.")
+      print("-------------------")
+
 
   def requisition_statistics(self): # Method to display the statistics of the requistion system
     pass
