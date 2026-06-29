@@ -131,3 +131,12 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     print(f"Total of Approved Requisition Entries: {total_number_approved}")
     print(f"Total of Not Approved Requisition Entries: {total_number_not_approved}")
     print(f"Total of Pending Requisition Entries: {total_number_pending}")
+
+  def displayMenu(self):
+    print("----------- Requisition System Menu -----------")
+    print("0.) Exit Requisition")
+    print("1.) Add Requisition Entry")
+    print("2.) View Requisition Entries")
+    print("3.) Respond to Requisition Status")
+    print("4.) Display Requisition Entry")
+    print("5.) View Requisition System Statistics")
