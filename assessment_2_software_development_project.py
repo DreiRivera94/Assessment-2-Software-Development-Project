@@ -1,6 +1,8 @@
 class requisitionSystem: # Class to encapsulate methods and parameters for requistion system
   def __init__(self, date, staff_id, staff_name, requisition_id, total, approval_reference_number): # Constructor Method
+
     self.__requisitions = []
+
     self.__approved_requisitions = []
     self.__not_approved_requisitions = []
     self.__pending_requisitions = []
@@ -99,23 +101,27 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
         print("Invalid requisition ID, please try again.")
   
   def displayRequisition(self): # Method to display a specific requistion information by entering the requesition ID
+    if len(self.__requisitions) == 0:
+      print("No requisition entries found.")
 
-    selected_requisition = input("To display a requisition entry, please enter its corresponding requisition ID ")
-    for requisition in self.__requisitions:
-      if selected_requisition == requisition["Requisition_ID"]:
-        print("-------------------")
-        print(f"Requisition Entry {selected_requisition} has been found.")
-        print("-------------------")
+    else:
+      selected_requisition = input("To display a requisition entry, please enter its corresponding requisition ID: ")
 
-        print(f"Requisition ID: {requisition["Requisition_ID"]}")
-        print(f"Date: {requisition["Date"]}")
-        print(f"Staff ID: {requisition["Staff_ID"]}")
-        print(f"Staff Name: {requisition["Staff_Name"]}")
-        print(f"Total: {requisition["Total"]}")
-        print(f"Status: {requisition["Status"]}")
-        print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
+      for requisition in self.__requisitions:
+        if selected_requisition == str(requisition["Requisition_ID"]):
 
-        return
+          print("-------------------")
+          print(f"Requisition ID: {selected_requisition} has been found.")
+          print("-------------------")
+
+          print(f"Date: {requisition["Date"]}")
+          print(f"Staff ID: {requisition["Staff_ID"]}")
+          print(f"Staff Name: {requisition["Staff_Name"]}")
+          print(f"Total: {requisition["Total"]}")
+          print(f"Status: {requisition["Status"]}")
+          print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
+
+          return
       
       print(f"Sorry, requisition number {selected_requisition} has not been found. Please try again.")
       print("-------------------")
@@ -167,3 +173,6 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
       else:
         print("Invalid choice. Please choose a number from 0 - 5.")
+
+requisition_system = requisitionSystem()
+requisition_system.runRequisitionSystem()
