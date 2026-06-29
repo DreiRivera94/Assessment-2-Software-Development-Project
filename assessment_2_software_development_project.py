@@ -2,6 +2,8 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
   def __init__(self, date, staff_id, staff_name, requisition_id, total, approval_reference_number): # Constructor Method
     self.__requisitions = []
     self.__approved_requisitions = []
+    self.__not_approved_requisitions = []
+    self.__pending_requisitions = []
     self.__item_list = []
     self.__price_list = []
 
@@ -118,5 +120,14 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
       print(f"Sorry, requisition number {selected_requisition} has not been found. Please try again.")
       print("-------------------")
 
-  def requisition_statistics(self): # Method to display the statistics of the requistion system
-    pass
+  def requisitionStatistics(self): # Method to display the statistics of the requistion system
+    total_number_requisitions = len(self.__requisitions)
+    total_number_approved = len(self.__approved_requisitions)
+    total_number_not_approved = len(self.__not_approved_requisitions)
+    total_number_pending = len(self.__pending_requisitions)
+
+    print("----------- Requisition System Statistics -----------")
+    print(f"Total Requisition Entries: {total_number_requisitions}")
+    print(f"Total of Approved Requisition Entries: {total_number_approved}")
+    print(f"Total of Not Approved Requisition Entries: {total_number_not_approved}")
+    print(f"Total of Pending Requisition Entries: {total_number_pending}")
