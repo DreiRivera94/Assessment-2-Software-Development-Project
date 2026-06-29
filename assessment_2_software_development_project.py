@@ -132,7 +132,7 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     print(f"Total of Not Approved Requisition Entries: {total_number_not_approved}")
     print(f"Total of Pending Requisition Entries: {total_number_pending}")
 
-  def displayMenu(self):
+  def requisitionSystemMenu(self):
     print("----------- Requisition System Menu -----------")
     print("0.) Exit Requisition")
     print("1.) Add Requisition Entry")
@@ -140,3 +140,30 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     print("3.) Respond to Requisition Status")
     print("4.) Display Requisition Entry")
     print("5.) View Requisition System Statistics")
+
+  def runRequisitionSystem(self):
+    while True:
+      self.requisitionSystemMenu()
+      menu_choice = input("Enter your choice: ")
+
+      if menu_choice == "0":
+        print("Thank you for using the Requisition System. Now Exiting.")
+        break
+
+      elif menu_choice == "1":
+        self.addRequistion()
+
+      elif menu_choice == "2":
+        self.viewRequisition()
+
+      elif menu_choice == "3":
+        self.respondRequisition()
+
+      elif menu_choice == "4":
+        self.displayRequisition()
+
+      elif menu_choice == "5":
+        self.requisitionStatistics()
+
+      else:
+        print("Invalid choice. Please choose a number from 0 - 5.")
