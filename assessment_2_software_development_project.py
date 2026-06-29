@@ -81,24 +81,46 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
       print("No requisition entries found. Please try again later.")
 
     else:
-      for requisition in self.__requisitions:
-        print(f"{requisition + 1} | {requisition["Requisition_ID"]} | Status: {requisition["Status"]}")
+      print("----------- Requisition Entries -----------")
 
-      requisition_choice = input("Enter your selected requisition ID: ")
+      for index, requisition in enumerate(self.__requisitions):
+        print(index + 1, "| Requisition ID:", requisition["Requisition_ID"], requisition["Total"], "| Status:", requisition["Status"])
 
-      if requisition_choice >= 1 and requisition_choice <= len(requisition):
-        selected_requisition = self.__requisition[requisition_choice - 1]
+      requisition_choice = input("Enter the requisition number to respond to: ")
+
+      if requisition_choice >= 1 and requisition_choice <= len(self.__requisitions):
+        selected_requisition = self.__requisitions[requisition_choice - 1]
 
         if selected_requisition["Status"] == "Pending":
-          print("This requisition entry is pending")
+          status_response = input("Enter response (approved/not approved): ")
+
+          if status_response == "approved":
+            selected_requisition["Status"] = "Approved"
+            selected_requisition["Approval_Reference_Number"] = selected_requisition["Staff_ID"] + str(selected_requisition["Requisition_ID"])[-3:]
+
+            self.__pending_requisitions -= 1
+            self.__approved_requisitions += 1
+
+            print("Requisition has been approved.")
+
+          elif status_response == "not approved":
+            selected_requisition["Status"] = "Not approved"
+            selected_requisition["Approval_Reference_Number"] = "Not available"
+
+            self.__pending_requisitions -= 1
+            self.__not_approved_requisitions += 1
+
+            print("Requisition has not been approved.")
+
+          else:
+            print("Invalid response. Please type approved or not approved.")
 
         else:
-          selected_requisition["Status"] = "Approved"
-          self.__approved_requisitions += 1
-          print(f"{selected_requisition["Requisition_ID"]} has been changed to approved.")
+          print("This requisition is not pending anymore.")
 
       else:
-        print("Invalid requisition ID, please try again.")
+        print("Invalid requisition number.")
+
   
   def displayRequisition(self): # Method to display a specific requistion information by entering the requesition ID
     if len(self.__requisitions) == 0:
