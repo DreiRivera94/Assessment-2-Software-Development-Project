@@ -79,13 +79,17 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
     elif status == "Pending":
       self.__pending_requisitions += 1
 
+    else:
+      status == "Not Approved"
+      self.__not_approved_requisitions += 1
+
     requisition = {"Date": date,
                    "Staff_ID": staff_id,
                    "Staff_Name": staff_name,
                    "Requisition_ID": requisition_id,
                    "Total": total,
-                   "Status": 'Pending',
-                   "Approval_Reference_Number": 'Not available'}
+                   "Status": status,
+                   "Approval_Reference_Number": approval_reference_number}
   
     self.__requisitions.append(requisition)
 
