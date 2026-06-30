@@ -1,6 +1,6 @@
 counter = 10000 # This is a global counter variable outsside of the class used for the requisition ID.
 
-class requisitionSystem: # Class to encapsulate methods and parameters for requistion system
+class RequisitionSystem: # Class to encapsulate methods and parameters for requistion system
   def __init__(self): # Constructor Method
 
     self.__requisitions = [] # The private list to store the requisition entries
@@ -233,5 +233,5 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
       else:
         print("Invalid choice. Please choose a number from 0 - 5.")
 
-requisition_system = requisitionSystem()
-requisition_system.runRequisitionSystem()
+start_requisition_system = RequisitionSystem()
+start_requisition_system.runRequisitionSystem()
