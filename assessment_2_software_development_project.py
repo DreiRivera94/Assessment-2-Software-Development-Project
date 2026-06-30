@@ -1,15 +1,18 @@
-counter = 10000
+counter = 10000 # This is a global counter variable outsside of the class used for the requisition ID.
 
 class requisitionSystem: # Class to encapsulate methods and parameters for requistion system
   def __init__(self): # Constructor Method
 
-    self.__requisitions = []
+    self.__requisitions = [] # The private list to store the requisition entries
 
+    # The private variables for the approved, not approvved, and pending that have 0 as their value. This will have value later once it increments and decrements. 
     self.__approved_requisitions = 0
     self.__not_approved_requisitions = 0
     self.__pending_requisitions = 0
 
-  def requisitionDetails(self):
+  def requisitionDetails(self): # Method used to store the item and price details that the user enters
+
+    # The item and price lists used 
     item_list = []
     price_list = []
 
@@ -50,7 +53,7 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
     global counter
 
-    print("----------- Add Requisition Entry -----------")
+    print("\n============ Add Requisition Entry ============")
 
     date = input("Enter the date (DD/MM/YEAR): ") # Asks user to enter date
     staff_id = input("Enter your 4 Digit Staff ID: ") # Asks user to enter 4 digit staff ID
@@ -86,11 +89,14 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
   
     self.__requisitions.append(requisition)
 
-    print(f"Requisition {self.requisition_id} has been added to the system.")
-    print("Requisition ID:", requisition_id)
-    print("Total: $", total)
-    print("Status:", status)
-    print("Approval Reference Number:", approval_reference_number)
+    print("\n============ Requisition Entry has been added! ============")
+    print(f"Date: {requisition["Date"]}")
+    print(f"Staff ID: {requisition["Staff_ID"]}")
+    print(f"Staff Name: {requisition["Staff_Name"]}")
+    print(f"Requisition ID: {requisition["Requisition_ID"]}")
+    print(f"Total: {requisition["Total"]}")
+    print(f"Status: {requisition["Status"]}")
+    print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
 
     return total
 
@@ -99,7 +105,7 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
       print("No requisition entries found. Please try again later.")
 
     else:
-      print("----------- Requisition Entries -----------")
+      print("\n============ Requisition Entries ============")
 
       for index, requisition in enumerate(self.__requisitions):
         print(index + 1, "| Requisition ID:", requisition["Requisition_ID"], requisition["Total"], "| Status:", requisition["Status"])
@@ -145,11 +151,7 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
     else:
       
-      print("-------------------")
-
-      print("Requisition Requests")
-
-      print("-------------------")
+      print("\n============ Requisition Requests ============")
 
       for requisition in self.__requisitions:
 
@@ -160,8 +162,6 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
         print(f"Total: {requisition["Total"]}")
         print(f"Status: {requisition["Status"]}")
         print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
-
-        print("-------------------")
 
   def displayRequisition(self): # Method to display a specific requistion information by entering the requesition ID
     if len(self.__requisitions) == 0:
@@ -190,19 +190,15 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
       print("-------------------")
 
   def requisitionStatistics(self): # Method to display the statistics of the requistion system
-    total_number_requisitions = len(self.__requisitions)
-    total_number_approved = len(self.__approved_requisitions)
-    total_number_not_approved = len(self.__not_approved_requisitions)
-    total_number_pending = len(self.__pending_requisitions)
 
-    print("----------- Requisition System Statistics -----------")
-    print(f"Total Requisition Entries: {total_number_requisitions}")
-    print(f"Total of Approved Requisition Entries: {total_number_approved}")
-    print(f"Total of Not Approved Requisition Entries: {total_number_not_approved}")
-    print(f"Total of Pending Requisition Entries: {total_number_pending}")
+    print("\n============ Requisition System Statistics ============")
+    print(f"Total Requisition Entries: {len(self.__requisitions)}")
+    print(f"Total of Approved Requisition Entries: {self.__approved_requisitions}")
+    print(f"Total of Not Approved Requisition Entries: {self.__pending_requisitions}")
+    print(f"Total of Pending Requisition Entries: {self.__not_approved_requisitions}")
 
   def requisitionSystemMenu(self):
-    print("----------- Requisition System Menu -----------")
+    print("\n============ Requisition System Menu ============")
     print("0.) Exit Requisition")
     print("1.) Add Requisition Entry")
     print("2.) View Requisition Entries")
@@ -210,7 +206,7 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     print("4.) Display Requisition Entry")
     print("5.) View Requisition System Statistics")
 
-  def runRequisitionSystem(self):
+  def runRequisitionSystem(self): # The method used to run the requisition system starting with the menu.
     while True:
       self.requisitionSystemMenu()
       menu_choice = input("Enter your choice: ")
