@@ -112,39 +112,45 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
       print("\n============ Requisition Entries ============")
 
       for index, requisition in enumerate(self.__requisitions):
-        print(index + 1, "| Requisition ID:", requisition["Requisition_ID"], requisition["Total"], "| Status:", requisition["Status"])
+        print(index + 1, "| Requisition ID:", requisition["Requisition_ID"], "| Total:", requisition["Total"], "| Status:", requisition["Status"])
 
       requisition_choice = input("Enter the requisition number to respond to: ")
 
-      if requisition_choice >= 1 and requisition_choice <= len(self.__requisitions):
-        selected_requisition = self.__requisitions[requisition_choice - 1]
+      if requisition_choice.isdigit():
+        requisition_choice = int(requisition_choice)
 
-        if selected_requisition["Status"] == "Pending":
-          status_response = input("Enter response (approved/not approved): ")
+        if requisition_choice >= 1 and requisition_choice <= len(self.__requisitions):
+          selected_requisition = self.__requisitions[requisition_choice - 1]
 
-          if status_response == "approved":
-            selected_requisition["Status"] = "Approved"
-            selected_requisition["Approval_Reference_Number"] = selected_requisition["Staff_ID"] + str(selected_requisition["Requisition_ID"])[-3:]
+          if selected_requisition["Status"] == "Pending":
+            status_response = input("Enter response (approved/not approved): ").lower()
 
-            self.__pending_requisitions -= 1
-            self.__approved_requisitions += 1
+            if status_response == "approved":
+              selected_requisition["Status"] = "Approved"
+              selected_requisition["Approval_Reference_Number"] = selected_requisition["Staff_ID"] + str(selected_requisition["Requisition_ID"])[-3:]
 
-            print("Requisition has been approved.")
+              self.__pending_requisitions -= 1
+              self.__approved_requisitions += 1
 
-          elif status_response == "not approved":
-            selected_requisition["Status"] = "Not approved"
-            selected_requisition["Approval_Reference_Number"] = "Not available"
+              print("Requisition has been approved.")
 
-            self.__pending_requisitions -= 1
-            self.__not_approved_requisitions += 1
+            elif status_response == "not approved":
+              selected_requisition["Status"] = "Not Approved"
+              selected_requisition["Approval_Reference_Number"] = "Not available"
 
-            print("Requisition has not been approved.")
+              self.__pending_requisitions -= 1
+              self.__not_approved_requisitions += 1
+
+              print("Requisition has not been approved.")
+
+            else:
+              print("Invalid response. Please type approved or not approved.")
 
           else:
-            print("Invalid response. Please type approved or not approved.")
+            print("This requisition is not pending anymore.")
 
         else:
-          print("This requisition is not pending anymore.")
+          print("Invalid requisition number.")
 
       else:
         print("Invalid requisition number.")
