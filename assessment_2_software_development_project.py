@@ -87,6 +87,7 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
       status == "Not Approved"
       self.__not_approved_requisitions += 1
 
+    # Dicitionary to store all information of a single requisition request.
     requisition = {"Date": date,
                    "Staff_ID": staff_id,
                    "Staff_Name": staff_name,
@@ -95,8 +96,10 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
                    "Status": status,
                    "Approval_Reference_Number": approval_reference_number}
   
+    # Used append to store the requisition into the private list.
     self.__requisitions.append(requisition)
 
+    # Print all information
     print("\n============ Requisition Entry has been added! ============")
     print(f"Date: {requisition["Date"]}")
     print(f"Staff ID: {requisition["Staff_ID"]}")
@@ -189,6 +192,7 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
       # Loop to display all requisitions inside the private list.
       for requisition in self.__requisitions:
 
+        # Print all information
         print(f"Date: {requisition["Date"]}")
         print(f"Staff ID: {requisition["Staff_ID"]}")
         print(f"Staff Name: {requisition["Staff_Name"]}")
@@ -201,6 +205,8 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
 
   def displayRequisition(self): # Method to display a specific requistion information by entering the requesition ID
     if len(self.__requisitions) == 0:
+
+      print("\n============================================")
       print("No requisition entries found.")
 
     else:
@@ -213,6 +219,7 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
 
           print("\n============ Requisition Entry has been found! ============")
 
+          # Print all information
           print(f"Date: {requisition["Date"]}")
           print(f"Staff ID: {requisition["Staff_ID"]}")
           print(f"Staff Name: {requisition["Staff_Name"]}")
@@ -235,6 +242,9 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
 
   def requisitionSystemMenu(self): # Method to display the menu selection.
     print("\n============ Requisition System Menu ============")
+
+    print("Kia Ora! Welcome to the Home Menu of the Requisition System.")
+
     print("0.) Exit Requisition")
     print("1.) Add Requisition Entry")
     print("2.) View Requisition Entries")
@@ -244,7 +254,7 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
 
   def runRequisitionSystem(self): # The method used to run the requisition system starting with the menu.
     while True:
-      self.requisitionSystemMenu()
+      self.requisitionSystemMenu() # Called the menu method.
       menu_choice = input("Enter your choice: ") # User will enter a number from 0 - 5 to navigate through the requisition system.
 
       if menu_choice == "0":
@@ -252,6 +262,7 @@ class RequisitionSystem: # Class to encapsulate methods and parameters for requi
         print("Thank you for using the Requisition System. Now Exiting.")
         break
 
+      # The user can use the methods by entering its corresponding number.
       elif menu_choice == "1":
         self.addRequistion()
 
