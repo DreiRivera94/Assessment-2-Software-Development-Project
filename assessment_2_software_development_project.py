@@ -5,9 +5,9 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
     self.__requisitions = []
 
-    self.__approved_requisitions = []
-    self.__not_approved_requisitions = []
-    self.__pending_requisitions = []
+    self.__approved_requisitions = 0
+    self.__not_approved_requisitions = 0
+    self.__pending_requisitions = 0
 
   def requisitionDetails(self):
     item_list = []
@@ -24,14 +24,13 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
       item_list.append(item_name)
       price_list.append(item_price)
 
-      add_confirm = input("Add another item? (yes/no): ").lower()
+      add_confirm = input("Add another item? (yes/no): ")
 
     total = sum(price_list)
 
     details = [item_list, price_list, total]
 
     return details
-
 
   def addRequistion(self): # Method to add a requisition entry
 
@@ -47,8 +46,12 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     requisition_id = counter  # Value for the requisition ID starts at 
 
     details = self.requisitionDetails()
+
+    item_list = details[0]
+    price_list = details[1]
+    total = details[2]
     
-    self.approval_reference_number = self.staff_id + self.requisition_id[-3:]
+    approval_reference_number = staff_id + requisition_id[-3:]
 
     requisition = {"Date": self.date,
                    "Staff_ID": self.staff_id,
