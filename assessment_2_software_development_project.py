@@ -1,20 +1,35 @@
 class requisitionSystem: # Class to encapsulate methods and parameters for requistion system
-  def __init__(self, date, staff_id, staff_name, requisition_id, total, approval_reference_number): # Constructor Method
+  def __init__(self): # Constructor Method
 
     self.__requisitions = []
 
     self.__approved_requisitions = []
     self.__not_approved_requisitions = []
     self.__pending_requisitions = []
-    self.__item_list = []
-    self.__price_list = []
 
-    self.date = date
-    self.staff_id = staff_id
-    self.staff_name = staff_name
-    self.requisition_id = requisition_id
-    self.total = total
-    self.approval_reference_number = approval_reference_number
+  def requisitionDetails(self):
+    item_list = []
+    price_list = []
+
+    print("Add items for the requisition.")
+
+    add_confirm = "yes"
+
+    while add_confirm == "yes":
+      item_name = input("Enter item name: ")
+      item_price = float(input("Enter item price: $"))
+
+      item_list.append(item_name)
+      price_list.append(item_price)
+
+      add_confirm = input("Add another item? (yes/no): ").lower()
+
+    total = sum(price_list)
+
+    details = [item_list, price_list, total]
+
+    return details
+
 
   def addRequistion(self): # Method to add a requisition entry
 
@@ -121,7 +136,6 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
       else:
         print("Invalid requisition number.")
 
-  
   def displayRequisition(self): # Method to display a specific requistion information by entering the requesition ID
     if len(self.__requisitions) == 0:
       print("No requisition entries found.")
