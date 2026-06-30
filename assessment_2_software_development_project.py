@@ -32,6 +32,20 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
     return details
 
+  def approveRequisition(self, total, staff_id, requisition_id): # Method to check if the requisition entry is approved or not
+    if total < 500:
+      status = "Approved"
+      approval_reference_number = staff_id + str(requisition_id)[-3:]
+
+    # If the total is $500 or more, it is pending for manager response
+    else:
+      status = "Pending"
+      approval_reference_number = "Not available"
+
+    approval_details = [status, approval_reference_number]
+
+    return approval_details
+
   def addRequistion(self): # Method to add a requisition entry
 
     global counter
@@ -50,51 +64,35 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
     item_list = details[0]
     price_list = details[1]
     total = details[2]
-    
-    approval_reference_number = staff_id + requisition_id[-3:]
 
-    requisition = {"Date": self.date,
-                   "Staff_ID": self.staff_id,
-                   "Staff_Name": self.staff_name,
-                   "Requisition_ID": self.requisition_id,
-                   "Total": self.total,
+    approval_details = self.approveRequisition(total, staff_id, requisition_id)
+
+    status = approval_details[0]
+    approval_reference_number = approval_details[1]
+
+    if status == "Approved":
+      self.__approved_requisitions += 1
+
+    elif status == "Pending":
+      self.__pending_requisitions += 1
+
+    requisition = {"Date": date,
+                   "Staff_ID": staff_id,
+                   "Staff_Name": staff_name,
+                   "Requisition_ID": requisition_id,
+                   "Total": total,
                    "Status": 'Pending',
                    "Approval_Reference_Number": 'Not available'}
   
     self.__requisitions.append(requisition)
 
     print(f"Requisition {self.requisition_id} has been added to the system.")
+    print("Requisition ID:", requisition_id)
+    print("Total: $", total)
+    print("Status:", status)
+    print("Approval Reference Number:", approval_reference_number)
 
-  def viewRequisition(self): # Method to view all requisitions 
-    if len(self.__requisitions) == 0:
-      print("No requisition entries found.")
-
-    else:
-      
-      print("-------------------")
-
-      print("Requisition Requests")
-
-      print("-------------------")
-
-      for requisition in self.__requisitions:
-
-        print(f"Date: {requisition["Date"]}")
-        print(f"Staff ID: {requisition["Staff_ID"]}")
-        print(f"Staff Name: {requisition["Staff_Name"]}")
-        print(f"Requisition ID: {requisition["Requisition_ID"]}")
-        print(f"Total: {requisition["Total"]}")
-        print(f"Status: {requisition["Status"]}")
-        print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
-
-        print("-------------------")
-
-  def approveRequisition(self): # Method to check if the requisition entry is approved or not
-    if self.total < 500:
-     self.status = "Approved"
-
-    else:
-      self.total = "Not Approved"
+    return total
 
   def respondRequisition(self): # Method to respond to requisition entry by changing the status (pending to approved or not approved)
     if len(self.__requisitions) == 0:
@@ -140,6 +138,30 @@ class requisitionSystem: # Class to encapsulate methods and parameters for requi
 
       else:
         print("Invalid requisition number.")
+
+  def viewRequisition(self): # Method to view all requisitions 
+    if len(self.__requisitions) == 0:
+      print("No requisition entries found.")
+
+    else:
+      
+      print("-------------------")
+
+      print("Requisition Requests")
+
+      print("-------------------")
+
+      for requisition in self.__requisitions:
+
+        print(f"Date: {requisition["Date"]}")
+        print(f"Staff ID: {requisition["Staff_ID"]}")
+        print(f"Staff Name: {requisition["Staff_Name"]}")
+        print(f"Requisition ID: {requisition["Requisition_ID"]}")
+        print(f"Total: {requisition["Total"]}")
+        print(f"Status: {requisition["Status"]}")
+        print(f"Approval Reference Number: {requisition["Approval_Reference_Number"]}")
+
+        print("-------------------")
 
   def displayRequisition(self): # Method to display a specific requistion information by entering the requesition ID
     if len(self.__requisitions) == 0:
